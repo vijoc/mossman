@@ -8,6 +8,9 @@
 #ifndef SCENES_JULIA_JULIASCENE_H_
 #define SCENES_JULIA_JULIASCENE_
 
+#include <mutex>
+#include <complex>
+
 #include "core/Scene.h"
 
 namespace mossman {
@@ -21,6 +24,14 @@ public:
 	virtual void update(double dt);
 	virtual void activated();
 	virtual void deactivated();
+
+	std::complex<float> getC();
+
+private:
+	std::mutex mCMutex;
+	std::complex<float> mC;
+
+	float mAngularVelocity;
 };
 
 } /* namespace scenes */

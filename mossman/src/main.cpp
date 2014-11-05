@@ -6,16 +6,30 @@
  */
 
 #include <chrono>
+#include <thread>
 #include "core/Application.h"
+#include <X11/Xlib.h>
 
 using namespace mossman;
 
+void render(Application* app) {
+	app->activateRenderContext();
+	while(app->isRunning()) {
+		app->render();
+	}
+}
+
 int main()
 {
+	XInitThreads(); // http://stackoverflow.com/q/20979886
 	using namespace std::chrono;
 
 	mossman::Application app;
 	app.init();
+
+	app.deactivateRenderContext();
+
+	std::thread tRender(render, &app);
 
 	auto currentTime = high_resolution_clock::now();
 
@@ -25,6 +39,9 @@ int main()
 		app.update(dt);
 		currentTime = newTime;
 	}
+
+	tRender.join();
+	app.quit();
 
 	return 0;
 }

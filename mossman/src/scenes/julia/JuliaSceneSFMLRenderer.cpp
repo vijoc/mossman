@@ -6,7 +6,11 @@
  */
 
 #include "JuliaSceneSFMLRenderer.h"
+
 #include <iostream>
+#include <complex>
+
+#include "scenes/JuliaScene.h"
 
 namespace mossman {
 namespace scenes {
@@ -21,8 +25,6 @@ JuliaSceneSFMLRenderer::JuliaSceneSFMLRenderer(std::shared_ptr<sf::RenderWindow>
 	}
 
 	mTexture.loadFromFile("res/scenes/julia/texture.png");
-
-	c = sf::Vector2f(0.5, 0.5);
 
 	sf::Vector2u windowSize = mContext->getSize();
 	auto quad = sf::VertexArray(sf::Quads, 4);
@@ -52,14 +54,10 @@ JuliaSceneSFMLRenderer::~JuliaSceneSFMLRenderer() {
 }
 
 void JuliaSceneSFMLRenderer::render() {
-	float x = c.x, y = c.y;
-	float angularVelocity = 0.05;
-	c.x = x * std::cos(angularVelocity) - y * std::sin(angularVelocity);
-	c.y = x * std::sin(angularVelocity) + y * std::cos(angularVelocity);
+	std::complex<float> c = mScene->getC();
 
-	mShader.setParameter("c", c);
+	mShader.setParameter("c", c.real(), c.imag());
 	mContext->draw(mVertex, &mShader);
-	std::cout << "OK" << std::endl;
 }
 
 } /* namespace julia */

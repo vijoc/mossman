@@ -37,22 +37,30 @@ int SceneManager::addScene(std::unique_ptr<Scene> scene, std::unique_ptr<Rendere
 }
 
 void SceneManager::setActiveScene(unsigned int index) {
+	std::lock_guard<std::mutex> sceneLock(mActiveSceneMutex);
+	std::lock_guard<std::mutex> rendererLock(mActiveRendererMutex);
+
 	if(index >= mScenes.size()) return;
 
 	auto newScene = mScenes[index].get();
+
 	if(newScene == mActiveScene) return;
+
 	if(mActiveScene != nullptr) mActiveScene->deactivated();
+
 	mActiveScene = newScene;
 	mActiveScene->activated();
 	mActiveRenderer = mRenderers[index].get();
 }
 void SceneManager::updateActiveScene(double dt) {
+	std::lock_guard<std::mutex> lock(mActiveSceneMutex);
 	if(mActiveScene == nullptr) return;
 
 	mActiveScene->update(dt);
 }
 
 void SceneManager::renderActiveScene() {
+	std::lock_guard<std::mutex> lock(mActiveRendererMutex);
 	if(mActiveRenderer == nullptr) return;
 
 	mActiveRenderer->render();

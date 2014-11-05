@@ -10,6 +10,7 @@
 
 #include <vector>
 #include <memory>
+#include <mutex>
 
 #include "Renderer.h"
 
@@ -34,6 +35,8 @@ private:
 	std::vector<std::unique_ptr<Renderer>> mRenderers;
 	Scene* mActiveScene;
 	Renderer* mActiveRenderer;
+	std::mutex mActiveSceneMutex;
+	std::mutex mActiveRendererMutex;
 };
 
 } /* namespace mossman */

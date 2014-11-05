@@ -30,6 +30,14 @@ public:
 	 */
 	void update(double dt);
 
+	void render();
+
+	void quit();
+
+	void deactivateRenderContext();
+
+	void activateRenderContext();
+
 	bool isRunning() const;
 
 	std::shared_ptr<sf::RenderWindow> getRenderContext() const;

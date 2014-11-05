@@ -28,7 +28,6 @@ public:
 	void render();
 private:
 	sf::Shader mShader;
-	sf::Vector2f c;
 	sf::VertexArray mVertex;
 	sf::Texture mTexture;
 	float mShrink;

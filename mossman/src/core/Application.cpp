@@ -41,15 +41,29 @@ void Application::update(double dt) {
 	{
 		if (event.type == sf::Event::Closed) {
 			mQuitSignaled = true;
-			mWindow->close();
 			return;
 		}
 	}
 
 	mSceneManager.updateActiveScene(dt);
+}
+
+void Application::render() {
 	mWindow->clear();
 	mSceneManager.renderActiveScene();
 	mWindow->display();
+}
+
+void Application::activateRenderContext() {
+	mWindow->setActive(true);
+}
+
+void Application::deactivateRenderContext() {
+	mWindow->setActive(false);
+}
+
+void Application::quit() {
+	mWindow->close();
 }
 
 bool Application::isRunning() const {

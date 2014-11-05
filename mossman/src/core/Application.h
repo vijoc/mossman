@@ -12,6 +12,7 @@
 #include <memory>
 
 #include "SceneManager.h"
+#include "util/FpsCounter.h"
 
 namespace mossman {
 
@@ -46,6 +47,10 @@ private:
 	std::shared_ptr<sf::RenderWindow> mWindow;
 	SceneManager mSceneManager;
 	bool mQuitSignaled;
+	sf::Font mDefaultFont;
+	sf::Text mFpsText;
+	sf::Clock mFpsClock;
+	FpsCounter mFpsCounter;
 };
 
 } /* namespace mossman */

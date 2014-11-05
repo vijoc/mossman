@@ -14,7 +14,7 @@
 
 namespace mossman {
 
-Application::Application() : mWindow(nullptr), mQuitSignaled(false) {
+Application::Application() : mWindow(nullptr), mQuitSignaled(false), mFpsCounter(100) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -33,6 +33,9 @@ void Application::init() {
 	julia::JuliaSceneSFMLRenderer* juliaSceneRenderer = new julia::JuliaSceneSFMLRenderer(mWindow, juliaScene);
 
 	mSceneManager.addScene(juliaScene, juliaSceneRenderer);
+
+	mDefaultFont.loadFromFile("res/fonts/Anonymous.ttf");
+	mFpsText.setFont(mDefaultFont);
 }
 
 void Application::update(double dt) {
@@ -51,6 +54,12 @@ void Application::update(double dt) {
 void Application::render() {
 	mWindow->clear();
 	mSceneManager.renderActiveScene();
+	mWindow->pushGLStates();
+	float currentTime = mFpsClock.restart().asSeconds();
+	mFpsCounter.pushFrameTime(currentTime);
+	mFpsText.setString(std::to_string(mFpsCounter.calcFps()));
+	mWindow->draw(mFpsText);
+	mWindow->popGLStates();
 	mWindow->display();
 }
 

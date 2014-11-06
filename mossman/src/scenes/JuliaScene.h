@@ -25,10 +25,10 @@ public:
 	virtual void activated();
 	virtual void deactivated();
 
-	std::complex<float> getC();
+	std::complex<float> getC() const;
 
 private:
-	std::mutex mCMutex;
+	mutable std::mutex mCMutex;
 	std::complex<float> mC;
 
 	float mAngularVelocity;

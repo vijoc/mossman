@@ -19,7 +19,6 @@ public:
 		mScene = scene;
 	}
 	virtual ~SceneRenderer() {};
-	virtual void render() = 0;
 protected:
 	TScene* mScene;
 };

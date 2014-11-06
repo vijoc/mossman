@@ -25,9 +25,9 @@ class JuliaSceneSFMLRenderer : public graphics::SFMLRenderer, public SceneRender
 public:
 	JuliaSceneSFMLRenderer(std::shared_ptr<sf::RenderWindow> context, JuliaScene* scene);
 	virtual ~JuliaSceneSFMLRenderer();
-	void render();
+	void render() const override;
 private:
-	sf::Shader mShader;
+	mutable sf::Shader mShader;
 	sf::VertexArray mVertex;
 	sf::Texture mTexture;
 	float mShrink;

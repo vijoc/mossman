@@ -39,7 +39,7 @@ void JuliaScene::deactivated() {
 
 }
 
-std::complex<float> JuliaScene::getC() {
+std::complex<float> JuliaScene::getC() const {
 	std::lock_guard<std::mutex> lock(mCMutex);
 	return mC;
 }

@@ -53,7 +53,7 @@ JuliaSceneSFMLRenderer::~JuliaSceneSFMLRenderer() {
 	// TODO Auto-generated destructor stub
 }
 
-void JuliaSceneSFMLRenderer::render() {
+void JuliaSceneSFMLRenderer::render() const {
 	std::complex<float> c = mScene->getC();
 
 	mShader.setParameter("c", c.real(), c.imag());

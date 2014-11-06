@@ -11,8 +11,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/OpenGL.hpp>
 
-#include "graphics/SFMLRenderer.h"
-#include "core/SceneRenderer.h"
+#include "graphics/SceneSFMLRenderer.h"
 
 namespace mossman {
 namespace scenes {
@@ -21,9 +20,9 @@ class JuliaScene;
 
 namespace julia {
 
-class JuliaSceneSFMLRenderer : public graphics::SFMLRenderer, public SceneRenderer<JuliaScene> {
+class JuliaSceneSFMLRenderer : public graphics::SceneSFMLRenderer<JuliaScene> {
 public:
-	JuliaSceneSFMLRenderer(std::shared_ptr<sf::RenderWindow> context, JuliaScene* scene);
+	JuliaSceneSFMLRenderer(sf::RenderWindow* context, JuliaScene* scene);
 	virtual ~JuliaSceneSFMLRenderer();
 	void render() const override;
 private:

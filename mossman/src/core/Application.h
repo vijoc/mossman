@@ -41,10 +41,8 @@ public:
 
 	bool isRunning() const;
 
-	std::shared_ptr<sf::RenderWindow> getRenderContext() const;
-
 private:
-	std::shared_ptr<sf::RenderWindow> mWindow;
+	std::unique_ptr<sf::RenderWindow> mWindow;
 	SceneManager mSceneManager;
 	bool mQuitSignaled;
 	sf::Font mDefaultFont;

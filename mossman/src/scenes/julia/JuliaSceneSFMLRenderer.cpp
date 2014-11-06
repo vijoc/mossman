@@ -16,9 +16,8 @@ namespace mossman {
 namespace scenes {
 namespace julia {
 
-JuliaSceneSFMLRenderer::JuliaSceneSFMLRenderer(std::shared_ptr<sf::RenderWindow> context, JuliaScene* scene) :
-		graphics::SFMLRenderer(context),
-		SceneRenderer<JuliaScene>(scene)
+JuliaSceneSFMLRenderer::JuliaSceneSFMLRenderer(sf::RenderWindow* context, JuliaScene* scene) :
+		graphics::SceneSFMLRenderer<JuliaScene>(context, scene)
 {
 	if(!mShader.loadFromFile("res/scenes/julia/julia.frag", sf::Shader::Fragment)) {
 		std::cout << "UH OH!" << std::endl;

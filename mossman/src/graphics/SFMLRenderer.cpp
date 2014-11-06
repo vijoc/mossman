@@ -12,7 +12,7 @@
 namespace mossman {
 namespace graphics {
 
-SFMLRenderer::SFMLRenderer(std::shared_ptr<sf::RenderWindow> context) : mContext(context) {
+SFMLRenderer::SFMLRenderer(sf::RenderWindow* context) : mContext(context) {
 
 }
 

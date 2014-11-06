@@ -25,12 +25,12 @@ Application::~Application() {
 
 void Application::init() {
 	using namespace mossman::scenes;
-	mWindow = std::make_shared<sf::RenderWindow>(sf::VideoMode(1280, 1024), "mossman");
+	mWindow = std::unique_ptr<sf::RenderWindow>(new sf::RenderWindow(sf::VideoMode(1280, 1024), "mossman"));
 	mWindow->setVerticalSyncEnabled(true);
 
 	JuliaScene* juliaScene = new JuliaScene();
 
-	julia::JuliaSceneSFMLRenderer* juliaSceneRenderer = new julia::JuliaSceneSFMLRenderer(mWindow, juliaScene);
+	julia::JuliaSceneSFMLRenderer* juliaSceneRenderer = new julia::JuliaSceneSFMLRenderer(mWindow.get(), juliaScene);
 
 	mSceneManager.addScene(juliaScene, juliaSceneRenderer);
 
@@ -77,10 +77,6 @@ void Application::quit() {
 
 bool Application::isRunning() const {
 	return !mQuitSignaled;
-}
-
-std::shared_ptr<sf::RenderWindow> Application::getRenderContext() const {
-	return mWindow;
 }
 
 } /* namespace mossman */

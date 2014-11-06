@@ -16,10 +16,10 @@ namespace graphics {
 
 class SFMLRenderer {
 public:
-	SFMLRenderer(std::shared_ptr<sf::RenderWindow> context);
+	SFMLRenderer(sf::RenderWindow* context);
 	virtual ~SFMLRenderer();
 protected:
-	std::shared_ptr<sf::RenderWindow> mContext;
+	sf::RenderWindow* mContext;
 };
 
 } /* namespace graphics */
